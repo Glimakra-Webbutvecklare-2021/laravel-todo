@@ -1,1 +1,8 @@
-docker run --rm -v /Users/henry/Repos/glimakra/php-modul/laravel-showcase:/app composer create-project --prefer-dist laravel/laravel todo-app
+// create laravel app
+docker run --rm -v ${PWD}:/app composer create-project --prefer-dist laravel/laravel todo-app
+
+// install auth library
+docker compose exec web composer require laravel/breeze
+
+// install auth ui
+docker compose exec web php artisan breeze:install

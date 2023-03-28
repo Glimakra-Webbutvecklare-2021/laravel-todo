@@ -11,7 +11,11 @@ services:
       - ./data:/var/lib/mysql
 
   web:
-    build: .
+    build:
+      args:
+        user: henry
+        uid: 1000
+      context: ./
     ports:
       - 8000:80
     volumes:
@@ -25,4 +29,12 @@ services:
       DB_DATABASE: todo_app
       DB_USERNAME: root
       DB_PASSWORD: root
-
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+        - 8001:80
+    environment:
+        - PMA_ARBITRARY=1
+    depends_on:
+        - db
